@@ -3,7 +3,7 @@ import React from 'react'
 function Product({productData}) {
 
   return (
-   <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr_180px] gap-6 p-6 border border-gray-700 rounded-xl bg-gray-900">
+   <div className="grid grid-cols-1 gap-6 p-6 border border-gray-700 rounded-xl bg-gray-900 w-full">
 
   {/* Image */}
   <div className="flex items-center justify-center">
@@ -14,16 +14,7 @@ function Product({productData}) {
     />
   </div>
 
-  {/* Information */}
-  <div className="flex flex-col justify-center gap-3">
-    <h1 className="text-xl font-semibold">
-      {productData.name}
-    </h1>
-
-    <p className="text-gray-400 leading-relaxed">
-      {productData.description}
-    </p>
-  </div>
+  
 
   {/* Actions */}
   <div className="flex flex-col justify-center gap-4">
