@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 
-function ProductsPage() {
+function ProductsPage({addToCart}) {
   const [data, setData] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-  const [maxPrice, setMaxPrice] = useState(1000);
-
+  const [maxPrice, setMaxPrice] = useState(10000);
+  const [selectCategory , setSelectCategory] = useState('')
  
 
   useEffect(() => {
@@ -18,13 +18,23 @@ function ProductsPage() {
     getData();
   }, []);
 
+  if (!data) {
+    return (
+      <div className="flex min-h-screen items-center justify-center text-white">
+        Loading...
+      </div>
+    );
+  }
+
   // Searching logic
   const filteredProducts = data?.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchInput.toLowerCase());
 
     const matchesPrice = maxPrice <= product?.priceCents;
 
-    return matchesSearch && matchesPrice;
+    const matchesCategory = selectCategory === "" || selectCategory === product?.category
+
+    return matchesSearch && matchesPrice && matchesCategory;
   });
 
   // max priceCents logic
@@ -40,7 +50,7 @@ function ProductsPage() {
   const fitlerCategory = new Set(mapedCategory)
   // console.log(fitlerCategory);
   const uniqueCategory  = [...fitlerCategory]
-  console.log(uniqueCategory);
+  // console.log(uniqueCategory);
 
 
   return (
@@ -89,11 +99,15 @@ function ProductsPage() {
                border border-gray-700
                outline-none focus:border-gray-500
                transition cursor-pointer "
+          onChange={(e) => setSelectCategory(e.target.value)}
         >
           <option>All Categories</option>
           {
             uniqueCategory?.map( ( category ) => (
-              <option key={category} value={category}>
+              <option 
+              key={category} 
+              value={category}
+              >
                 {category}
               </option>
             ))
@@ -103,7 +117,7 @@ function ProductsPage() {
 
       <div className="px-6 grid lg:grid-cols-[repeat(4,1fr)] sm:grid-cols-[repeat(3,1fr)] w-full gap-4">
         {filteredProducts?.map((product) => {
-          return <Product key={product.id} productData={product} />;
+          return <Product key={product.id} addToCart={addToCart} productData={product} />;
         })}
       </div>
     </div>
