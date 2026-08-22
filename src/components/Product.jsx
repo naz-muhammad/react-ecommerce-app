@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../App";
 
-function Product({ productData , addToCart }) {
+function Product({productData}) {
 
-
+  const {addToCart} = useContext(CartContext)
   const navigate = useNavigate()
 
   return (

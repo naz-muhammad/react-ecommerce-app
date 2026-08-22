@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../App";
 
 function ProductDetailPage() {
+
+  const {addToCart} = useContext(CartContext)
   const { productId } = useParams();
 
   const [product, setProduct] = useState(null);
@@ -92,7 +96,9 @@ function ProductDetailPage() {
           {/* Actions */}
           <div className="mt-10 flex gap-4">
 
-            <button className="flex-1 rounded-xl border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-gray-800">
+            <button className="flex-1 rounded-xl border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-gray-800"
+            onClick={()=>addToCart(product)}
+            >
               Add to Cart
             </button>
 

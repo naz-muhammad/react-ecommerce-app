@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { ShoppingCart } from 'lucide-react';
 
 function Navbar() {
 
@@ -17,7 +18,7 @@ function Navbar() {
       </NavLink>
 
       <NavLink to="/cart-page" className={navStyle}>
-        Cart
+        <ShoppingCart />
       </NavLink>
     </nav>
   )

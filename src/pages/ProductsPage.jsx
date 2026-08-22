@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 
-function ProductsPage({addToCart}) {
+function ProductsPage() {
   const [data, setData] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [maxPrice, setMaxPrice] = useState(10000);
@@ -117,7 +117,7 @@ function ProductsPage({addToCart}) {
 
       <div className="px-6 grid lg:grid-cols-[repeat(4,1fr)] sm:grid-cols-[repeat(3,1fr)] w-full gap-4">
         {filteredProducts?.map((product) => {
-          return <Product key={product.id} addToCart={addToCart} productData={product} />;
+          return <Product key={product.id} productData={product} />;
         })}
       </div>
     </div>
