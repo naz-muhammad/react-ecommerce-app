@@ -11,19 +11,18 @@ function Navbar() {
 
   //  calculate total number of items
   const cartCount = cart.reduce(
-    (total, cartItem) => total + cartItem.quantity,
-    0
-  );
+    (total , cartItem) => total + cartItem.quantity , 0
+  )
 
   const navStyle = ({ isActive }) =>
-    `px-3 py-2 text-sm font-medium transition-colors ${
+    `font-sans text-sm font-medium tracking-wide uppercase transition-colors ${
       isActive
-        ? 'text-white'
-        : 'text-gray-400 hover:text-white'
+        ? 'text-brass'
+        : 'text-muted hover:text-paper'
     }`
 
   return (
-    <nav className="flex items-center gap-2 sm:gap-4">
+    <nav className="flex items-center gap-6 sm:gap-8">
 
       <NavLink to="/" className={navStyle}>
         Products
@@ -31,21 +30,25 @@ function Navbar() {
 
       <NavLink
         to="/cart-page"
-        className={`${navStyle} relative`}
+        className={({ isActive }) =>
+          `relative flex items-center transition-colors ${
+            isActive ? 'text-brass' : 'text-muted hover:text-paper'
+          }`
+        }
       >
-        <ShoppingCart />
+        <ShoppingCart size={22} strokeWidth={1.75} />
 
-        {/* 🔴 CHANGED: quantity badge */}
         {cartCount > 0 && (
           <span className="
-            absolute -right-1 -top-1
+            absolute -right-2 -top-2
             flex h-5 w-5
             items-center justify-center
             rounded-full
-            bg-white
-            text-xs
-            font-bold
-            text-black
+            bg-brass
+            font-mono
+            text-[11px]
+            font-semibold
+            text-ink
           ">
             {cartCount}
           </span>

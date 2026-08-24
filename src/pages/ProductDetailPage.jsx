@@ -35,7 +35,7 @@ function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-white">
+      <div className="flex min-h-screen items-center justify-center font-sans text-muted">
         Loading...
       </div>
     );
@@ -43,66 +43,69 @@ function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-white">
+      <div className="flex min-h-screen items-center justify-center font-sans text-muted">
         Product not found
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen px-6 py-10">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-2">
+    <div className="min-h-screen bg-ink px-4 py-6 sm:px-6 md:px-8 md:py-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
 
-        {/* LEFT - PRODUCT IMAGE */}
-        <div className="flex md:min-h-125 min-h-[40vh] items-center justify-center rounded-2xl border border-gray-700 bg-gray-900 ">
+        {/* PRODUCT IMAGE — full width block on mobile, sticky column on desktop */}
+        <div className="flex h-72 items-center justify-center rounded-2xl border border-line bg-surface-raised sm:h-96 md:sticky md:top-24 md:h-130">
           <img
             src={product?.image}
             alt={product?.name}
-            className="max-h-112.5 w-full object-contain p-10"
+            className="h-full w-full object-contain p-8 sm:p-10"
           />
         </div>
 
-        {/* RIGHT - PRODUCT DETAILS */}
+        {/* PRODUCT DETAILS */}
         <div className="flex flex-col justify-center">
 
           {/* Category */}
-          <p className="mb-3 text-sm text-gray-400">
+          <p className="font-sans text-xs uppercase tracking-widest text-muted">
             {product?.category}
           </p>
 
           {/* Product Name */}
-          <h1 className="text-3xl font-bold text-white lg:text-5xl">
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-wide text-paper sm:text-4xl md:text-5xl">
             {product?.name}
           </h1>
 
           {/* Price */}
-          <div className="mt-6">
-            <span className="text-3xl font-bold text-white">
+          <div className="ticket mt-5 inline-flex w-fit items-center bg-brass py-1.5 pl-5 pr-3.5">
+            <span className="font-mono text-lg font-semibold text-ink sm:text-xl">
               PKR {product?.priceCents}
             </span>
           </div>
 
           {/* Description */}
-          <div className="mt-8">
-            <h2 className="mb-3 text-lg font-semibold text-white">
+          <div className="mt-6 sm:mt-8">
+            <h2 className="mb-2 font-sans text-sm font-semibold uppercase tracking-wide text-muted">
               Description
             </h2>
 
-            <p className="max-w-xl leading-7 text-gray-400">
+            <p className="max-w-xl font-sans leading-7 text-paper/80">
               {product?.description}
             </p>
           </div>
 
-          {/* Actions */}
-          <div className="mt-10 flex gap-4">
+          {/* Actions — stack full-width on mobile, side by side from sm: up */}
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4">
 
-            <button className="flex-1 rounded-xl border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-gray-800"
-            onClick={()=>addToCart(product)}
+            <button
+              className="flex-1 rounded-xl border border-line px-6 py-3.5 font-sans font-medium
+                         text-paper transition hover:border-brass hover:text-brass"
+              onClick={()=>addToCart(product)}
             >
               Add to Cart
             </button>
 
-            <button className="flex-1 rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-gray-200">
+            <button className="flex-1 rounded-xl bg-brass px-6 py-3.5 font-sans font-semibold
+                                text-ink transition hover:bg-brass-hover active:scale-95">
               Buy Now
             </button>
 
